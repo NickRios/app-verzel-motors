@@ -14,7 +14,9 @@
     "plugins": [
         "@typescript-eslint"
     ],
+    "@typescript-eslint/interface-name-prefix": ["error", { "prefixWithI": "always" }],
     "rules": {
+        "no-useless-constructor": "off",
         "import/resolver": [
             "error",
             "ignorePackages",

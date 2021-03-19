@@ -5,6 +5,7 @@ import routes from './routes';
 import uploadConfig from './config/upload'
 
 import './database';
+import './container';
 
 const app = express();
 

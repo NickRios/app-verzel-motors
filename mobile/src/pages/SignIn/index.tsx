@@ -1,7 +1,7 @@
 import React , { useCallback, useRef } from 'react'
-import Icon from 'react-native-vector-icons/Feather'
 import { KeyboardAvoidingView, Platform, View, ScrollView, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
+import Icon from 'react-native-vector-icons/Feather'
 import * as Yup from 'yup'
 
 import { Form } from '@unform/mobile'
