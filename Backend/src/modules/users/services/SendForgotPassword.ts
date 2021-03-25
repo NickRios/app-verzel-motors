@@ -1,7 +1,7 @@
 import { injectable, inject } from 'tsyringe'
-import AppError from '../../../errors/AppError';
 
-//import User from '../model/User';
+
+
 import IUsersRepository from '../repositories/IUsersRepository'
 import IUserTokensRepository from '../repositories/IUserTokensRepository'
 
@@ -25,7 +25,7 @@ class SendForgotPasswordService {
         const user = await this.usersRepository.findByEmail(email)
 
         if (!user) {
-            throw new AppError('User does not exist.');
+            throw new Error('User does not exist.');
         }
 
         await this.userTokensRepository.generate(user.id);

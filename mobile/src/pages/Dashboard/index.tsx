@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image } from 'react-native'
+import { Image, Dimensions } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
 import { useNavigation } from '@react-navigation/native'
 
@@ -16,20 +16,45 @@ import { Container,
   AppointmentsContainer,
   AppointmentsImage,
   AppointmentsMeta,
-  ButtonContainer,
+  MenuContent,
   ButtonMeta,
-  ButtonText,
+  ButtonText
 } from './styles'
 
 import hospital from '../../assets/hospital.png'
 import Cartao from '../../assets/Cartão.png'
 
-import { useAuth } from '../../hooks/auth'
+
+interface MenuItems {
+  name: string;
+  icon: string;
+  screen: string
+}
+
+export const menuItems:MenuItems [] = [
+  {
+    name: 'Agendar',
+    icon: 'calendar',
+    screen: 'Modules',
+  },
+  {
+    name: 'Consultas',
+    icon: 'list',
+    screen: 'Internships'
+  },
+  {
+    name: 'Receitas',
+    icon: 'file',
+    screen: 'Requests'
+  },
+  {
+    name: 'Ficha',
+    icon: 'file-text',
+    screen: 'Requests'
+  },
+]
 
 const Dashboard: React.FC = () => {
-  const { signOut } = useAuth();
-
-  const navigation = useNavigation();
 
   return (
     <Container>
@@ -67,28 +92,14 @@ const Dashboard: React.FC = () => {
         </AppointmentsContainer>
       </StyleContainer>
 
-      <ButtonContainer>
-        <ButtonMeta onPress={() => navigation.navigate('')}>
-          <Icon name='calendar' size={35} color="#000" />
-
-          <ButtonText>Agendar</ButtonText>
-        </ButtonMeta>
-
-        <ButtonMeta>
-          <Icon name='list' size={35} color="#000" />
-
-          <ButtonText>Consultas</ButtonText>
-        </ButtonMeta>
-
-        <ButtonMeta>
-          <Icon name='file-text' size={35} color="#000" />
-
-          <ButtonText>Receitas</ButtonText>
-        </ButtonMeta>
-
-
-      </ButtonContainer>
-
+      <MenuContent snapToInterval={200} data={menuItems} renderItem = {
+        ({ item }) => (
+          <ButtonMeta>
+            <Icon name={item.icon} size={35} color="#000" />
+            <ButtonText>{item.name}</ButtonText>
+          </ButtonMeta>
+        )
+      } />
 
     </Container>
   )

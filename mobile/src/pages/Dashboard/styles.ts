@@ -57,7 +57,7 @@ export const TitleText = styled.Text`
 `;
 
 export const SubTitle = styled.Text`
-  margin: 20px 0 25px;
+  margin: 30px 0 25px;
   padding: 0 30px;
 `;
 
@@ -90,10 +90,11 @@ export const AppointmentsMeta = styled.View`
   bottom: 50
   margin: 0 0 10px 0
 `
-export const ButtonContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-around;
-`
+export const MenuContent = styled.FlatList.attrs({
+  contentContainerStyle: { paddingHorizontal: 10 },
+  horizontal: true,
+  showsHorizontalScrollIndicator: false,
+})``;
 
 export const ButtonMeta = styled(RectButton)`
   width: 120px;
@@ -102,7 +103,7 @@ export const ButtonMeta = styled(RectButton)`
   background: #EAEAEA;
   border-radius: 12px;
   padding: 20px 10px;
-  margin: 50px;
+  margin: 50px 0 0 10px;
 `
 
 export const ButtonText = styled.Text`
@@ -111,7 +112,6 @@ export const ButtonText = styled.Text`
   font-family: 'Poppins-SemiBold';
   margin: 10px;
 `;
-
 
 
 

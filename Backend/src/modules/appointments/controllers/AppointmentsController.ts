@@ -10,6 +10,8 @@ export default class AppointmentsController {
         const { provider_id , date } = req.body;
 
         const parsedDate = parseISO(date);
+
+        console.log(req.body)
         
         const createAppointment = container.resolve(CreateAppointmentService)
 
