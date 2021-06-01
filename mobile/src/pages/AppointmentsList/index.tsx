@@ -13,7 +13,10 @@ import { Container,
   StyleContainer,
   AppointmentsContainer,
   AppointmentsImage,
-  AppointmentsMeta,
+  AppointmentsIconContainer,
+  AppointmentsTextHospital,
+  AppointmentsIcon,
+  AppointmentsIconText,
 } from './styles'
 
 import hospital from '../../assets/hospital.png'
@@ -51,17 +54,57 @@ const MedicalDocuments: React.FC = () => {
 
       <StyleContainer>
         <AppointmentsContainer>
+
           <AppointmentsImage>
             <Image source={hospital} />
+
           </AppointmentsImage>
 
-          <AppointmentsMeta>
-            <Icon name='calendar' size={18} color="#000" />
-          </AppointmentsMeta>
+          <AppointmentsIconContainer>
+            <AppointmentsTextHospital>Hospital Samaritano</AppointmentsTextHospital>
+            <AppointmentsIcon>
 
-          <AppointmentsMeta>
-            <Icon name='clock' size={18} color="#000" />
-          </AppointmentsMeta>
+              <Icon name='calendar' size={18} color="#000" />
+
+              <AppointmentsIconText>31 Mai</AppointmentsIconText>
+
+            </AppointmentsIcon>
+
+
+            <AppointmentsIcon>
+              <Icon name='clock' size={18} color="#000" />
+
+              <AppointmentsIconText>14:00</AppointmentsIconText>
+            </AppointmentsIcon>
+          </AppointmentsIconContainer>
+
+        </AppointmentsContainer>
+
+        <AppointmentsContainer>
+
+          <AppointmentsImage>
+            <Image source={hospital} />
+
+          </AppointmentsImage>
+
+          <AppointmentsIconContainer>
+            <AppointmentsTextHospital>Hospital Unimed</AppointmentsTextHospital>
+            <AppointmentsIcon>
+
+              <Icon name='calendar' size={18} color="#000" />
+
+              <AppointmentsIconText>01 Jun</AppointmentsIconText>
+
+            </AppointmentsIcon>
+
+
+            <AppointmentsIcon>
+              <Icon name='clock' size={18} color="#000" />
+
+              <AppointmentsIconText>17:00</AppointmentsIconText>
+            </AppointmentsIcon>
+          </AppointmentsIconContainer>
+
         </AppointmentsContainer>
       </StyleContainer>
 

@@ -24,7 +24,7 @@ export const StartButton = styled(RectButton)`
   height: 55px;
   background: #7BCCAC;
   border-radius: 15px;
-  margin-top: 30px
+  margin-top: 30px;
 
   justify-content: center;
   align-items: center;

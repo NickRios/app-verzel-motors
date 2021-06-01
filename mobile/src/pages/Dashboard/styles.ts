@@ -1,6 +1,6 @@
 import { Dimensions } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
+
 
 interface MetricType {
   screenWidth: number;
@@ -29,7 +29,7 @@ export const StyleCard = styled.View`
   width: ${metrics.screenWidth -68};
   height: 200px;
   padding: 0 20px;
-  margin: 0 30px 20px;
+  margin: 15px 30px 20px;
 `
 
 export const CardImage = styled.ImageBackground`
@@ -38,6 +38,12 @@ export const CardImage = styled.ImageBackground`
   padding: 0 40px;
 `
 export const CardText = styled.Text`
+  font-size: 12px;
+  color: #FFF;
+  font-family: 'Poppins-SemiBold';
+`;
+
+export const CardTextNumber = styled.Text`
   font-size: 20px;
   color: #FFF;
   font-family: 'Poppins-SemiBold';
@@ -45,7 +51,7 @@ export const CardText = styled.Text`
 `;
 
 export const Title = styled.View`
-  margin: 20px 0 20px;
+  margin: 0 0 20px;
   padding: 0 20px ;
 `;
 
@@ -53,57 +59,75 @@ export const TitleText = styled.Text`
   font-size: 35px;
   color: #000;
   font-family: 'Poppins-SemiBold';
-  margin-top: 5px;
 `;
 
 export const SubTitle = styled.Text`
-  margin: 30px 0 25px;
+  margin: 25px 0 25px;
   padding: 0 30px;
 `;
 
 export const SubTitleText = styled.Text`
-  font-size: 20px;
+  font-size: 22px;
   color: #000;
   font-family: 'Poppins-Medium';
 `;
 
 export const StyleContainer = styled.View`
-  padding: 0 30px;
+  padding: 0 20px;
 `
 
 export const AppointmentsContainer = styled.View`
-  width: 100%
-  height: 110px
+  width: 100%;
+  height: 120px;
   background: #EAEAEA;
   border-radius: 12px;
-  padding: 20px;
-  align-items: center;
-  margin: 0 0 20px
+  flex-direction: row;
+  padding: 10px
+  margin: 0 0 40px;
 `;
 
+
+
 export const AppointmentsImage = styled.View`
-  width: 100%
-  margin: 8px 0 5px
+  margin: 20px 0 0 10px;
 `
-export const AppointmentsMeta = styled.View`
-  width: 40%
-  bottom: 50
-  margin: 0 0 10px 0
+export const AppointmentsIconContainer = styled.View`
+  margin: 5px 20px;
+`;
+
+export const AppointmentsTextHospital = styled.Text`
+  margin: 0 5px;
+  font-size: 21px;
+  color: #7BCCAC;
+  font-family: 'Poppins-Medium';
+`;
+
+export const AppointmentsIcon = styled.View`
+  flex-direction: row;
+  margin: 5px
 `
+
+export const AppointmentsIconText = styled.Text`
+  margin: 0 10px;
+  font-size: 13px;
+  color: #000;
+  font-family: 'Poppins-Medium';
+`;
+
 export const MenuContent = styled.FlatList.attrs({
   contentContainerStyle: { paddingHorizontal: 10 },
   horizontal: true,
   showsHorizontalScrollIndicator: false,
 })``;
 
-export const ButtonMeta = styled(RectButton)`
+export const ButtonMeta = styled.TouchableOpacity`
   width: 120px;
   height: 100px;
   align-items: center;
   background: #EAEAEA;
   border-radius: 12px;
   padding: 20px 10px;
-  margin: 50px 0 0 10px;
+  margin: 30px 0 0 10px;
 `
 
 export const ButtonText = styled.Text`

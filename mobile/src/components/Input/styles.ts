@@ -33,3 +33,4 @@ export const TextInput = styled.TextInput`
 export const Icon = styled(MaterialIcon)`
   margin-right: 14px;
 `;
+

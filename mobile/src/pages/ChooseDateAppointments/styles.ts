@@ -35,7 +35,7 @@ export const HeaderTitle = styled.Text`
   color: #000;
   font-family: "Poppins-SemiBold";
   font-size: 30px;
-  margin-left: 16px;
+  margin: 0 15px
 `;
 
 export const SubTitle = styled.View`

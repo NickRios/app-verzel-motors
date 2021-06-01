@@ -1,10 +1,12 @@
 import React, { useCallback, useState, useMemo }from 'react'
-import { Image, Platform } from 'react-native'
+import { DatePickerAndroid, Image, Platform } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { parseISO, format } from 'date-fns'
+import ptBR from "date-fns/locale/pt-BR";
 
+import date from '../../assets/date.png'
 
 import { Container,
   Background,
@@ -26,19 +28,21 @@ import { Container,
   CreateAppointmentButtonText
 } from './styles'
 
+interface RouteParams {
+  hospitalId: string;
+}
 
-import date from '../../assets/date.png'
-
-import { useAuth } from '../../hooks/auth'
-
+export interface Hour {
+  date: string;
+}
 
 const horarios = [
+  {hora: '2021-03-30T06:00:00.000Z'},
+  {hora: '2021-03-30T07:00:00.000Z'},
   {hora: '2021-03-30T08:00:00.000Z'},
   {hora: '2021-03-30T09:00:00.000Z'},
   {hora: '2021-03-30T10:00:00.000Z'},
   {hora: '2021-03-30T11:00:00.000Z'},
-  {hora: '2021-03-30T12:00:00.000Z'},
-  {hora: '2021-03-30T13:00:00.000Z'},
   {hora: '2021-03-30T14:00:00.000Z'},
   {hora: '2021-03-30T15:00:00.000Z'},
   {hora: '2021-03-30T16:00:00.000Z'},
@@ -47,17 +51,20 @@ const horarios = [
   {hora: '2021-03-30T19:00:00.000Z'},
   {hora: '2021-03-30T20:00:00.000Z'},
   {hora: '2021-03-30T21:00:00.000Z'},
-  {hora: '2021-03-30T22:00:00.000Z'},
 ]
 
 
 const ChooseDateAppointments: React.FC = () => {
 
-  const { goBack } = useNavigation();
-  const navigation = useNavigation();
+  const { goBack, navigate } = useNavigation();
+  const route = useRoute();
+  const routeParams = route.params as RouteParams;
+
+  const hospitalId = routeParams.hospitalId
 
 	const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date())
+  const [selectedHour, setSelectedHour] = useState('')
 
 
   const handleToggleDatePicker = useCallback(() => {
@@ -73,6 +80,23 @@ const ChooseDateAppointments: React.FC = () => {
       setSelectedDate(date);
     }
   }, [])
+
+  const formatDate = (dateString: Date) => {
+    return format(new Date(dateString), "EEEE, 'dia' dd 'de' LLLL 'de' yyyy 'ás '" , {locale: ptBR })
+  }
+
+  const capitalizeFirstLetter = (x: string) => {
+    return x.charAt(0).toUpperCase() + x.slice(1);
+  }
+
+  const createFormatedDate = () => {
+    return capitalizeFirstLetter(formatDate(selectedDate)) + "" + selectedHour
+  }
+
+  const navigateToAppoimentsCreated = async () => {
+    const formatedDate = createFormatedDate()
+    navigate('AppoimentsCreated', { hospitalId, formatedDate });
+  }
 
   const navigateBack = useCallback(() => {
     goBack();
@@ -96,7 +120,7 @@ const ChooseDateAppointments: React.FC = () => {
     });
   }, [horarios]);
 
-  const [selectedHour, setSelectedHour] = useState('')
+
 
   const formatHour = (horaString: string) => {
     return format(new Date(horaString), 'HH:mm')
@@ -141,7 +165,7 @@ const ChooseDateAppointments: React.FC = () => {
             <SectionContent>
               {(morningAppointments || []).map(horario => (
                 <Hour selected={selectedHour == formatHour(horario.hora)}
-                onPress={() => setSelectedHour(formatHour(horario.hora))}
+                key={horario.hora} onPress={() => setSelectedHour(formatHour(horario.hora))}
                 >
                   <HourText>{formatHour(horario.hora)}</HourText>
                 </Hour>
@@ -154,7 +178,7 @@ const ChooseDateAppointments: React.FC = () => {
             <SectionContent>
               {(afternoonAppointments || []).map(horario => (
                 <Hour selected={selectedHour == formatHour(horario.hora)}
-                onPress={() => setSelectedHour(formatHour(horario.hora))}
+                key={horario.hora} onPress={() => setSelectedHour(formatHour(horario.hora))}
                 >
                   <HourText>{formatHour(horario.hora)}</HourText>
                 </Hour>
@@ -167,7 +191,7 @@ const ChooseDateAppointments: React.FC = () => {
             <SectionContent>
               {(nightAppointments || []).map(horario => (
                 <Hour selected={selectedHour == formatHour(horario.hora)}
-                onPress={() => setSelectedHour(formatHour(horario.hora))}
+                key={horario.hora} onPress={() => setSelectedHour(formatHour(horario.hora))}
                 >
                   <HourText>{formatHour(horario.hora)}</HourText>
                 </Hour>
@@ -178,7 +202,7 @@ const ChooseDateAppointments: React.FC = () => {
 
         </Schedule>
 
-        <CreateAppointmentButton onPress={() => navigation.navigate('AppoimentsCreated')}>
+        <CreateAppointmentButton onPress={() => navigateToAppoimentsCreated()}>
           <CreateAppointmentButtonText>Agendar</CreateAppointmentButtonText>
         </CreateAppointmentButton>
 

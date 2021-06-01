@@ -1,7 +1,6 @@
 import React from 'react'
-import { Image, Dimensions } from 'react-native'
+import { Image } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
-import { useNavigation } from '@react-navigation/native'
 
 import { Container,
   Title,
@@ -12,10 +11,14 @@ import { Container,
   StyleCard,
   CardImage,
   CardText,
+  CardTextNumber,
   StyleContainer,
   AppointmentsContainer,
   AppointmentsImage,
-  AppointmentsMeta,
+  AppointmentsIconContainer,
+  AppointmentsTextHospital,
+  AppointmentsIcon,
+  AppointmentsIconText,
   MenuContent,
   ButtonMeta,
   ButtonText
@@ -35,26 +38,27 @@ export const menuItems:MenuItems [] = [
   {
     name: 'Agendar',
     icon: 'calendar',
-    screen: 'Modules',
+    screen: 'ChooseDoctorAppointments',
   },
   {
     name: 'Consultas',
     icon: 'list',
-    screen: 'Internships'
+    screen: 'AppointmentsList'
   },
   {
     name: 'Receitas',
     icon: 'file',
-    screen: 'Requests'
+    screen: 'MedicalDocuments'
   },
   {
     name: 'Ficha',
     icon: 'file-text',
-    screen: 'Requests'
+    screen: 'ChartMedical'
   },
 ]
 
-const Dashboard: React.FC = () => {
+
+const Dashboard: React.FC = ({ navigation }) => {
 
   return (
     <Container>
@@ -66,8 +70,9 @@ const Dashboard: React.FC = () => {
 
         <StyleCard>
           <CardImage source={Cartao}>
-
-          <CardText>703 2016 2396 2374</CardText>
+          <CardText>Data de Nasc.: 23/01/1997</CardText>
+          <CardText>Sexo: M</CardText>
+          <CardTextNumber>703 2016 2396 2374</CardTextNumber>
           </CardImage>
         </StyleCard>
       </Background>
@@ -78,23 +83,38 @@ const Dashboard: React.FC = () => {
 
       <StyleContainer>
         <AppointmentsContainer>
+
           <AppointmentsImage>
             <Image source={hospital} />
+
           </AppointmentsImage>
 
-          <AppointmentsMeta>
-            <Icon name='calendar' size={18} color="#000" />
-          </AppointmentsMeta>
+          <AppointmentsIconContainer>
+            <AppointmentsTextHospital>Hospital Samaritano</AppointmentsTextHospital>
+            <AppointmentsIcon>
 
-          <AppointmentsMeta>
-            <Icon name='clock' size={18} color="#000" />
-          </AppointmentsMeta>
+              <Icon name='calendar' size={18} color="#000" />
+
+              <AppointmentsIconText>31 Mai</AppointmentsIconText>
+
+            </AppointmentsIcon>
+
+
+            <AppointmentsIcon>
+              <Icon name='clock' size={18} color="#000" />
+
+              <AppointmentsIconText>14:00</AppointmentsIconText>
+            </AppointmentsIcon>
+          </AppointmentsIconContainer>
+
         </AppointmentsContainer>
       </StyleContainer>
 
-      <MenuContent snapToInterval={200} data={menuItems} renderItem = {
+      <MenuContent snapToInterval={200} data={menuItems}
+      keyExtractor= {( item, index ) => item.name}
+      renderItem = {
         ({ item }) => (
-          <ButtonMeta>
+          <ButtonMeta onPress={() => navigation.navigate(item.screen)} >
             <Icon name={item.icon} size={35} color="#000" />
             <ButtonText>{item.name}</ButtonText>
           </ButtonMeta>

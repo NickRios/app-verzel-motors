@@ -35,14 +35,14 @@ const PageOne: React.FC = () => {
 
         <Image  style={styles.img3} source={Image1} />
       </View>
-      
+
       <Title>
         <TitleText>Agende e </TitleText>
         <TitleText>Realize</TitleText>
         <TitleText>Consultas</TitleText>
-        <TitleText>Online</TitleText>  
+        <TitleText>Online</TitleText>
       </Title>
-      
+
       <StartButton onPress={() => navigation.navigate('SignIn')}><StartButtonText>Iniciar</StartButtonText>
 
       </StartButton>

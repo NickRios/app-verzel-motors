@@ -80,24 +80,8 @@ const SignUp: React.FC = () => {
               placeholder="Email"
             />
 
-            <Input
-              secureTextEntry
-              name="password"
-              icon="lock"
-              placeholder="Senha"
-              textContentType="newPassword"
-            />
-
-            <Input
-              secureTextEntry
-              name="password"
-              icon="lock"
-              placeholder="Senha"
-              textContentType="newPassword"
-            />
-
             <Button onPress={() => formRef.current?.submitForm()}>
-              Redefinir
+              Enviar
             </Button>
         </Form>
 

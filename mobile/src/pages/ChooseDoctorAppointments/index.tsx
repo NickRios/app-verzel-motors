@@ -1,7 +1,11 @@
-import React, { useCallback, useState }from 'react'
-import { Image } from 'react-native'
+import React, { useCallback, useState, useEffect }from 'react'
+import { Image, ScrollView } from 'react-native'
 import Icon from 'react-native-vector-icons/Feather'
-import { useNavigation } from '@react-navigation/native'
+import { useRoute, useNavigation } from '@react-navigation/native'
+
+import doctor from '../../assets/Doctor.png'
+import { useAuth } from '../../hooks/auth'
+import api from '../../services/api'
 
 import { Container,
   Background,
@@ -13,96 +17,94 @@ import { Container,
   DotContainer,
   DotButton,
   DotButtonText,
-  StyleContainer,
+  SpecialityContainer,
   MedicineList,
+  MedicineListContainer,
   MedicineListText,
 
 } from './styles'
 
-import doctor from '../../assets/Doctor.png'
 
-import { useAuth } from '../../hooks/auth'
-
+export interface Speciality {
+  id: string;
+  name: string;
+}
 
 const ChooseDoctorAppointments: React.FC = () => {
-  const { signOut } = useAuth();
-
-  const { goBack, navigate } = useNavigation();
+  const { goBack } = useNavigation();
   const navigation = useNavigation();
+
+  const [telemedicinaSelected, setTelemedicinaSelected ] = useState(true);
+  const [specialitys, setSpecialitys] = useState<Speciality[]>([]);
 
   const navigateBack = useCallback(() => {
     goBack();
   }, [goBack]);
 
-  const [telemedicinaSelected, setTelemedicinaSelected ] = useState(true);
+  useEffect(() => {
+    api.get('specialitys').then((response) => {
+      setSpecialitys(response.data);
+    });
+  }, []);
+
+
 
 
   return (
-    <Container>
-      <Background>
-      <Header>
-        <BackButton onPress={navigateBack}>
-          <Icon name="arrow-left" size={30} color="#000" />
-        </BackButton>
+    <ScrollView
+      keyboardShouldPersistTaps="handled"
+    >
+      <Container>
+        <Background>
+        <Header>
+          <BackButton onPress={navigateBack}>
+            <Icon name="arrow-left" size={30} color="#000" />
+          </BackButton>
 
-        <HeaderTitle>Agendar</HeaderTitle>
+          <HeaderTitle>Agendar</HeaderTitle>
 
-      </Header>
+        </Header>
 
-      </Background>
+        </Background>
 
-      <SubTitle>
-        <SubTitleText>Escolha uma Especialidade</SubTitleText>
+        <SubTitle>
+          <SubTitleText>Escolha uma Especialidade</SubTitleText>
 
-        <Image source={doctor} />
-      </SubTitle>
+          <Image source={doctor} />
+        </SubTitle>
 
 
-      <DotContainer>
-        <DotButton
-        onPress={() => {setTelemedicinaSelected(true)}}
-        selected={telemedicinaSelected}>
-          <DotButtonText selected={telemedicinaSelected}>
-          Telemedicina</DotButtonText>
-        </DotButton>
+        <DotContainer>
+          <DotButton
+          onPress={() => {setTelemedicinaSelected(true)}}
+          selected={telemedicinaSelected}>
+            <DotButtonText selected={telemedicinaSelected}>
+            Telemedicina</DotButtonText>
+          </DotButton>
 
-        <DotButton
-        onPress={() => {setTelemedicinaSelected(false)}}
-        selected={!telemedicinaSelected}>
-          <DotButtonText
+          <DotButton
+          onPress={() => {setTelemedicinaSelected(false)}}
           selected={!telemedicinaSelected}>
-            Presencial</DotButtonText>
-        </DotButton>
-      </DotContainer>
+            <DotButtonText
+            selected={!telemedicinaSelected}>
+              Presencial</DotButtonText>
+          </DotButton>
+        </DotContainer>
 
-      <StyleContainer>
+        {
+          specialitys.map(specialitys => (
+            <MedicineListContainer key={specialitys.id} onPress={() => navigation.navigate('ChooseHospitalAppointments')}>
+              <MedicineListText>{specialitys.name}</MedicineListText>
 
-        <MedicineList onPress={() => navigation.navigate('ChooseHospitalAppointments')}>
-          <MedicineListText>Clinico Geral</MedicineListText>
-        </MedicineList>
-
-        <MedicineList>
-          <MedicineListText>Cardiologista</MedicineListText>
-        </MedicineList>
-
-        <MedicineList>
-          <MedicineListText>Dermatologista</MedicineListText>
-        </MedicineList>
-
-        <MedicineList>
-          <MedicineListText>Endocrionologista</MedicineListText>
-        </MedicineList>
-
-        <MedicineList>
-          <MedicineListText>Pediatra</MedicineListText>
-        </MedicineList>
-
-      </StyleContainer>
+            </MedicineListContainer>
+          ))
+        }
 
 
 
 
-    </Container>
+      </Container>
+    </ScrollView>
   )
 }
 

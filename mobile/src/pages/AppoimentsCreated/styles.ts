@@ -19,8 +19,9 @@ export const Title = styled.Text`
   text-align: center;
 `;
 
+
 export const Description = styled.Text`
-  width: 287px;
+  width: 260px
   font-family: "RobotoSlab-Medium";
   font-size: 16px
   color: #AEAEAE;

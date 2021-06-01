@@ -1,5 +1,6 @@
-import { RectButton, TouchableOpacity } from 'react-native-gesture-handler';
+import { FlatList, RectButton, TouchableOpacity } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
+import { Speciality } from '.';
 
 interface DotButtonProps {
   selected: boolean
@@ -35,7 +36,7 @@ export const HeaderTitle = styled.Text`
   color: #000;
   font-family: "Poppins-SemiBold";
   font-size: 30px;
-  margin-left: 16px;
+  margin: 0 15px
 `;
 
 export const SubTitle = styled.View`
@@ -54,7 +55,7 @@ export const SubTitleText = styled.Text`
 export const DotContainer = styled.View`
   flex-direction: row;
   justify-content: center;
-  margin: 35px;
+  margin: 15px 0 30px;
 `
 export const DotButton = styled.TouchableOpacity<DotButtonProps>`
   height: 35px;
@@ -72,24 +73,30 @@ export const DotButtonText = styled.Text<DotButtonTextProps>`
   font-family: 'Poppins-Medium';
 `;
 
-export const StyleContainer = styled.View`
+export const SpecialityContainer = styled.View`
   padding: 0 30px;
 `
 
-export const MedicineList = styled(RectButton)`
-  width: 100%
-  height: 70px
+export const MedicineList = styled(FlatList as new () => FlatList<Speciality>
+)``;
+
+export const MedicineListContainer = styled(RectButton)`
+  align-self: center;
+  width: 80%;
+  flex-direction: row;
   background: #EAEAEA;
   border-radius: 12px;
   padding: 20px;
-  align-items: center;
   margin: 0 0 20px
+
+  align-items: center;
+  justify-content: center;
 `;
 
 export const MedicineListText = styled.Text`
   font-size: 16px;
   color: #000;
   font-family: 'Poppins-Medium';
-`;
 
+`
 
