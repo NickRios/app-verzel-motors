@@ -1,7 +1,9 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import Icon from 'react-native-vector-icons/Feather';
-import api from '../../services/api';
-import {FlatList, ScrollView, Image, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import IconFont from 'react-native-vector-icons/FontAwesome5';
+import IconFeather from 'react-native-vector-icons/Feather';
+import api from '../../../services/api';
+import {FlatList, ScrollView, Image, StyleSheet, View} from 'react-native';
 
 const styles = StyleSheet.create({
   image: {
@@ -17,6 +19,7 @@ import {
   Header,
   BodyContainer,
   BodyHeaderText,
+  BackButton,
   CardContainer,
   BrandText,
   ModelText,
@@ -51,15 +54,28 @@ export interface Cars {
   image: string;
 }
 
-const Dashboard: React.FC = () => {
+const UpdateCars: React.FC = () => {
+  const {goBack, navigate} = useNavigation();
+
+  const navigateBack = useCallback(() => {
+    goBack();
+  }, [goBack]);
+
   const [cars, setCars] = useState<Cars[]>([]);
+
+  const navigateSelectedEditCar = useCallback(
+    (car: object) => {
+      navigate('SelectedCarEdit', {car});
+    },
+    [navigate],
+  );
 
   const handleResquet = async () => {
     try {
       const {data} = await api.get('/cars');
       setCars(data.content);
     } catch (error) {
-      throw new Error('Nenhum carro encontrado !!');
+      console.log(error);
     }
   };
 
@@ -71,18 +87,22 @@ const Dashboard: React.FC = () => {
     <ScrollView keyboardShouldPersistTaps="handled">
       <Container>
         <Header>
+          <BackButton onPress={navigateBack}>
+            <IconFont name="arrow-left" size={23} color="#fff" />
+          </BackButton>
           <Title>
-            <TitleText> Lista </TitleText>
+            <TitleText> Editar </TitleText>
           </Title>
         </Header>
 
         <BodyContainer>
-          <BodyHeaderText>Carros Novos e Usados </BodyHeaderText>
+          <BodyHeaderText>Escolha um carro: </BodyHeaderText>
+
           <FlatList
             data={cars}
             keyExtractor={car => car.id}
             renderItem={({item}) => (
-              <CardContainer>
+              <CardContainer onPress={() => navigateSelectedEditCar(item)}>
                 <ContentContainer>
                   <CardInformationContainer>
                     <CardHeaderContainer>
@@ -113,7 +133,7 @@ const Dashboard: React.FC = () => {
                 <LineContainer />
 
                 <CardFooterContainer>
-                  <Icon name="map-pin" size={13} color="#000" />
+                  <IconFeather name="map-pin" size={13} color="#000" />
 
                   <RegionText>{item.region}</RegionText>
 
@@ -128,4 +148,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default UpdateCars;

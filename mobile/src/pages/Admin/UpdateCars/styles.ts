@@ -1,17 +1,5 @@
-import {Dimensions} from 'react-native';
+import {RectButton} from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
-
-interface MetricType {
-  screenWidth: number;
-  screenHeight: number;
-}
-
-const {width, height} = Dimensions.get('window');
-
-const metrics: MetricType = {
-  screenWidth: width < height ? width : height,
-  screenHeight: width < height ? height : width,
-};
 
 export const Container = styled.View`
   flex: 1;
@@ -21,12 +9,17 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
+  display: flex;
+  flex-direction: row;
   background: #07203f;
+`;
+
+export const BackButton = styled.TouchableOpacity`
+  margin: 15px 20px;
 `;
 
 export const Title = styled.View`
   margin: 0 0 20px;
-  padding: 0 20px;
 `;
 
 export const TitleText = styled.Text`
@@ -41,15 +34,14 @@ export const BodyContainer = styled.View`
 `;
 
 export const BodyHeaderText = styled.Text`
-  text-align: center;
   font-size: 15px;
-  color: #000;
-  font-family: 'Poppins-SemiBold';
+  color: #737272;
+  font-family: 'Poppins-Medium';
 
   margin-bottom: 20px;
 `;
 
-export const CardContainer = styled.View`
+export const CardContainer = styled(RectButton)`
   width: 100%;
   background: #eaeaea;
   border-radius: 10px;

@@ -1,50 +1,32 @@
-import styled from 'styled-components/native'
-import { Platform } from 'react-native'
+import styled from 'styled-components/native';
+import {RectButton} from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   flex: 1;
-  align-content: center;
-  justify-content: flex-start;
-  padding: 0 50px ${Platform.OS === 'android' ? 120 : 40}px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px;
 `;
 
 export const Title = styled.Text`
-  font-size: 45px;
-  color: #000;
+  font-size: 24px;
+  color: #fff;
   font-family: 'Poppins-SemiBold';
-  margin: 45px 0 30px
+  margin: 34px 0 54px;
 `;
 
-export const ForgotPassword = styled.TouchableOpacity`
-  margin-top: 24px;
-  align-items: center;
-`;
-
-export const ForgotPasswordText = styled.Text`
-  color: #212020;
-  font-size: 14px;
-  font-family: 'Poppins-Medium';
-
-`
-
-export const CreateAccountButton = styled.TouchableOpacity`
-  position:absolute;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: #E9E9E9;
-  border-radius: 3px
-  border-color: #E9E9E9;
-  padding: 20px 0;
+export const LoginButton = styled(RectButton)`
+  height: 55px;
+  background: #fff;
+  border-radius: 15px;
+  margin-top: 20px;
 
   justify-content: center;
   align-items: center;
-  flex-direction: row;
 `;
 
-export const CreateAccountButtonText = styled.Text`
-  color: #212020;
-  font-size: 14px;
-  font-family: 'Poppins-Medium';
-  margin-left: 12px;
+export const LoginButtonText = styled.Text`
+  font-family: 'Poppins-SemiBold';
+  font-size: 16px;
+  color: #000;
 `;

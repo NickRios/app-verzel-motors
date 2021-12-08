@@ -53,12 +53,12 @@ const Input: React.FC<InputProps> = ({name, icon, ...rest}) => {
       <Icon
         name={icon}
         size={20}
-        color={isFocused || isFilled ? '#00A4B2' : '#9D9D9D'}
+        color={isFocused || isFilled ? '#00A4B2' : '#AEAEAE'}
       />
 
       <TextInput
         ref={inputElementRef}
-        placeholderTextColor="#9D9D9D"
+        placeholderTextColor="#AEAEAE"
         defaultValue={defaultValue}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
